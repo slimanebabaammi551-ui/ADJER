@@ -1178,5 +1178,106 @@
   .nav-links a {
     min-height: 44px;
   }
+/* ===== أساسي الشعار ===== */
+.logo {
+  font-family: 'Amiri', serif;
+  font-size: 1.9rem;
+  color: #f2c94c; /* ذهبي فاتح */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 1px 1px 2px #00000044; /* ظل خفيف */
+}
 
+/* ===== زر الهامبرغر ===== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 11000;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: #f2c94c;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ===== القائمة الرئيسية ===== */
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  font-family: 'Amiri', serif;
+}
+
+.nav-link {
+  color: #ffffff;
+  font-size: 1.1rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: #f2c94c22;
+  color: #f2c94c;
+}
+
+/* ===== للهاتف ===== */
+@media (max-width: 768px) {
+  /* إخفاء القائمة التقليدية */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100%;
+    background: #1c1c1c; /* داكن ليناسب الروحانية */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 2rem;
+    transition: right 0.5s ease;
+    box-shadow: -4px 0 12px #00000055; /* ظل متحرك على الجانب */
+    z-index: 10000;
+  }
+
+  /* القائمة عند الضغط على الهامبرغر */
+  .nav-menu.active {
+    right: 0;
+  }
+
+  /* عرض زر الهامبرغر */
+  .hamburger {
+    display: flex;
+  }
+
+  /* تأثير دوران الهامبرغر عند الفتح */
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  .nav-link {
+    font-size: 1.4rem;
+    color: #f2c94c;
+    text-shadow: 0 0 3px #00000088;
+  }
 }
