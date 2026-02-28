@@ -1057,3 +1057,126 @@
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
   }
+/* ============================================
+   FINAL MOBILE OPTIMIZATION
+   ضع هذا الكود في نهاية ملف CSS
+   ============================================ */
+
+@media (max-width: 768px) {
+
+  /* تقليل المسافات العامة */
+  body {
+    padding: 0 14px;
+  }
+
+  section {
+    padding: 35px 0;
+  }
+
+  /* ================= NAVBAR ================= */
+
+  nav {
+    padding: 10px 14px;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+  /* ================= HERO ================= */
+
+  .hero h1 {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  /* ================= DUA CARDS ================= */
+
+  .dua-container {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .dua-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .dua-card p {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ================= JUZ BUTTONS ================= */
+
+  .juz-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .juz-button {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  /* ================= TASBIH ================= */
+
+  .tasbih-container {
+    padding: 18px;
+  }
+
+  .tasbih-count {
+    font-size: 36px;
+  }
+
+  .tasbih-button {
+    width: 75px;
+    height: 75px;
+    font-size: 15px;
+  }
+
+  /* ================= COUNTDOWN ================= */
+
+  .countdown-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .time-unit {
+    width: 100%;
+    padding: 14px;
+  }
+
+  /* ================= MODAL ================= */
+
+  .juz-modal-content {
+    width: 95%;
+    padding: 18px;
+  }
+
+  /* ================= تحسين اللمس ================= */
+
+  button,
+  .juz-button,
+  .tasbih-button,
+  .nav-links a {
+    min-height: 44px;
+  }
+
+}
