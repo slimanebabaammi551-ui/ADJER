@@ -143,71 +143,7 @@
     100% { text-shadow: 0 0 50px var(--gold-glow), 0 0 70px var(--gold-glow); }
   }
 
-  /* ============================================
-    NAVIGATION
-    ============================================ */
-  nav {
-    position: sticky;
-    top: 0;
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 1rem 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
-  }
-
-  .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .nav-link {
-    color: var(--gold);
-    text-decoration: none;
-    font-size: 1.3rem;
-    font-weight: 600;
-    padding: 0.8rem 2rem;
-    border-radius: 30px;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .nav-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, var(--gold-glow), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .nav-link:hover::before {
-    left: 100%;
-  }
-
-  .nav-link:hover {
-    color: var(--primary-dark);
-    background: var(--gold);
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 0 25px var(--gold-glow);
-  }
-
+ 
   /* ============================================
     SECTIONS
     ============================================ */
@@ -1188,96 +1124,108 @@
   align-items: center;
   gap: 0.5rem;
   text-shadow: 1px 1px 2px #00000044; /* ظل خفيف */
+} 
+/* ============ شريط التنقل الاحترافي ============ */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1.2rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  position: relative;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ===== زر الهامبرغر ===== */
+/* شعار الموقع */
+.nav .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #2c3e50;
+}
+
+.nav .logo i {
+  font-size: 1.8rem;
+  color: #27ae60; /* لون أخضر احترافي */
+}
+
+/* القائمة العادية */
+.nav .nav-menu {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav .nav-menu li a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  padding: 0.3rem 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.nav .nav-menu li a:hover {
+  color: #27ae60;
+  transform: translateY(-2px);
+}
+
+/* زر الهامبرجر للهاتف */
 .hamburger {
   display: none;
   flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 25px;
   cursor: pointer;
-  z-index: 11000;
+  gap: 5px;
 }
 
 .hamburger span {
-  display: block;
-  height: 4px;
-  width: 100%;
-  background: #f2c94c;
+  width: 28px;
+  height: 3px;
+  background-color: #2c3e50;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 
-/* ===== القائمة الرئيسية ===== */
-.nav-menu {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  font-family: 'Amiri', serif;
+/* تأثير الهامبرجر عند الضغط */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
-.nav-link {
-  color: #ffffff;
-  font-size: 1.1rem;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+/* قائمة الهاتف – مخفية في البداية */
+.nav-menu.active {
+  right: 0;
 }
 
-.nav-link:hover {
-  background: #f2c94c22;
-  color: #f2c94c;
-}
-
-/* ===== للهاتف ===== */
-@media (max-width: 768px) {
-  /* إخفاء القائمة التقليدية */
-  .nav-menu {
+/* تنسيق الهاتف */
+@media screen and (max-width: 768px) {
+  .nav .nav-menu {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 70%;
     height: 100%;
-    background: #1c1c1c; /* داكن ليناسب الروحانية */
+    width: 270px;
+    background-color: #ffffff;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    padding: 2rem;
-    transition: right 0.5s ease;
-    box-shadow: -4px 0 12px #00000055; /* ظل متحرك على الجانب */
-    z-index: 10000;
+    align-items: flex-start;
+    padding: 3rem 1.5rem;
+    gap: 2rem;
+    transition: right 0.4s ease;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+    z-index: 999;
   }
 
-  /* القائمة عند الضغط على الهامبرغر */
-  .nav-menu.active {
-    right: 0;
-  }
-
-  /* عرض زر الهامبرغر */
   .hamburger {
     display: flex;
   }
-
-  /* تأثير دوران الهامبرغر عند الفتح */
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-  }
-
-  .nav-link {
-    font-size: 1.4rem;
-    color: #f2c94c;
-    text-shadow: 0 0 3px #00000088;
-  }
 }
+  
+
