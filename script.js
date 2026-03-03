@@ -2,13 +2,13 @@
 // FIREBASE SETUP
 // ============================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, onValue }
+import { getDatabase, ref, set, remove, onValue }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCdbtCNYY-NJK6zNRhUe6Sduz31R8Q3XtA",
   authDomain: "sadaqah-jariyah-cac9b.firebaseapp.com",
-  databaseURL: "https://sadaqah-jariyah-cac9b-default-rtdb.firebaseio.com", // ← your real URL
+  databaseURL: "https://sadaqah-jariyah-cac9b-default-rtdb.firebaseio.com",
   projectId: "sadaqah-jariyah-cac9b",
   storageBucket: "sadaqah-jariyah-cac9b.firebasestorage.app",
   messagingSenderId: "744079593545",
@@ -18,85 +18,76 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db  = getDatabase(app);
 
-// ============================================
-// SADAQAH JARIYAH - JAVASCRIPT
-// In Memory of Beloved Father & Brother
-// ============================================
-
 document.addEventListener('DOMContentLoaded', function() {
 
   // ============================================
-  // JUZ DATA - All 30 Juz with exact Arabic format
+  // JUZ DATA
   // ============================================
   const juzData = [
-    { number: 1,  name: "الجزء 1",  range: "الفاتحة (من الآية 1 إلى الآية 7) → البقرة (من الآية 1 إلى الآية 141)",  start: "سورة الفاتحة، الآية 1",  end: "سورة البقرة، الآية 141" },
-    { number: 2,  name: "الجزء 2",  range: "البقرة (من الآية 142 إلى الآية 252)",                                    start: "سورة البقرة، الآية 142",  end: "سورة البقرة، الآية 252" },
-    { number: 3,  name: "الجزء 3",  range: "البقرة (من الآية 253 إلى آل عمران (من الآية 92)",                        start: "سورة البقرة، الآية 253",  end: "سورة آل عمران، الآية 92" },
-    { number: 4,  name: "الجزء 4",  range: "آل عمران (من الآية 93 إلى النساء (من الآية 23)",                         start: "سورة آل عمران، الآية 93", end: "سورة النساء، الآية 23" },
-    { number: 5,  name: "الجزء 5",  range: "النساء (من الآية 24 إلى الآية 147)",                                     start: "سورة النساء، الآية 24",   end: "سورة النساء، الآية 147" },
-    { number: 6,  name: "الجزء 6",  range: "النساء (من الآية 148 إلى المائدة (من الآية 81)",                         start: "سورة النساء، الآية 148",  end: "سورة المائدة، الآية 81" },
-    { number: 7,  name: "الجزء 7",  range: "المائدة (من الآية 82 إلى الأنعام (من الآية 110)",                        start: "سورة المائدة، الآية 82",  end: "سورة الأنعام، الآية 110" },
-    { number: 8,  name: "الجزء 8",  range: "الأنعام (من الآية 111 إلى الأعراف (من الآية 87)",                        start: "سورة الأنعام، الآية 111", end: "سورة الأعراف، الآية 87" },
-    { number: 9,  name: "الجزء 9",  range: "الأعراف (من الآية 88 إلى الأنفال (من الآية 40)",                         start: "سورة الأعراف، الآية 88",  end: "سورة الأنفال، الآية 40" },
-    { number: 10, name: "الجزء 10", range: "الأنفال (من الآية 41 إلى التوبة (من الآية 92)",                          start: "سورة الأنفال، الآية 41",  end: "سورة التوبة، الآية 92" },
-    { number: 11, name: "الجزء 11", range: "التوبة (من الآية 93 إلى هود (من الآية 5)",                               start: "سورة التوبة، الآية 93",   end: "سورة هود، الآية 5" },
-    { number: 12, name: "الجزء 12", range: "هود (من الآية 6 إلى يوسف (من الآية 52)",                                 start: "سورة هود، الآية 6",       end: "سورة يوسف، الآية 52" },
-    { number: 13, name: "الجزء 13", range: "يوسف (من الآية 53 إلى إبراهيم (من الآية 52)",                            start: "سورة يوسف، الآية 53",     end: "سورة إبراهيم، الآية 52" },
-    { number: 14, name: "الجزء 14", range: "الحجر (من الآية 1 إلى النحل (من الآية 128)",                             start: "سورة الحجر، الآية 1",     end: "سورة النحل، الآية 128" },
-    { number: 15, name: "الجزء 15", range: "الإسراء (من الآية 1 إلى الكهف (من الآية 74)",                            start: "سورة الإسراء، الآية 1",   end: "سورة الكهف، الآية 74" },
-    { number: 16, name: "الجزء 16", range: "الكهف (من الآية 75 إلى طه (من الآية 135)",                               start: "سورة الكهف، الآية 75",    end: "سورة طه، الآية 135" },
-    { number: 17, name: "الجزء 17", range: "الأنبياء (من الآية 1 إلى الحج (من الآية 78)",                            start: "سورة الأنبياء، الآية 1",  end: "سورة الحج، الآية 78" },
-    { number: 18, name: "الجزء 18", range: "المؤمنون (من الآية 1 إلى الفرقان (من الآية 20)",                         start: "سورة المؤمنون، الآية 1",  end: "سورة الفرقان، الآية 20" },
-    { number: 19, name: "الجزء 19", range: "الفرقان (من الآية 21 إلى النمل (من الآية 55)",                           start: "سورة الفرقان، الآية 21",  end: "سورة النمل، الآية 55" },
-    { number: 20, name: "الجزء 20", range: "النمل (من الآية 56 إلى العنكبوت (من الآية 45)",                          start: "سورة النمل، الآية 56",    end: "سورة العنكبوت، الآية 45" },
-    { number: 21, name: "الجزء 21", range: "العنكبوت (من الآية 46 إلى الأحزاب (من الآية 30)",                        start: "سورة العنكبوت، الآية 46", end: "سورة الأحزاب، الآية 30" },
-    { number: 22, name: "الجزء 22", range: "الأحزاب (من الآية 31 إلى يس (من الآية 27)",                              start: "سورة الأحزاب، الآية 31",  end: "سورة يس، الآية 27" },
-    { number: 23, name: "الجزء 23", range: "يس (من الآية 28 إلى الزمر (من الآية 31)",                                start: "سورة يس، الآية 28",       end: "سورة الزمر، الآية 31" },
-    { number: 24, name: "الجزء 24", range: "الزمر (من الآية 32 إلى فصلت (من الآية 46)",                              start: "سورة الزمر، الآية 32",    end: "سورة فصلت، الآية 46" },
-    { number: 25, name: "الجزء 25", range: "فصلت (من الآية 47 إلى الجاثية (من الآية 37)",                            start: "سورة فصلت، الآية 47",     end: "سورة الجاثية، الآية 37" },
-    { number: 26, name: "الجزء 26", range: "الأحقاف (من الآية 1 إلى الذاريات (من الآية 30)",                         start: "سورة الأحقاف، الآية 1",   end: "سورة الذاريات، الآية 30" },
-    { number: 27, name: "الجزء 27", range: "الذاريات (من الآية 31 إلى الحديد (من الآية 29)",                         start: "سورة الذاريات، الآية 31", end: "سورة الحديد، الآية 29" },
-    { number: 28, name: "الجزء 28", range: "المجادلة (من الآية 1 إلى التحريم (من الآية 12)",                         start: "سورة المجادلة، الآية 1",  end: "سورة التحريم، الآية 12" },
-    { number: 29, name: "الجزء 29", range: "الملك (من الآية 1 إلى المرسلات (من الآية 50)",                           start: "سورة الملك، الآية 1",     end: "سورة المرسلات، الآية 50" },
-    { number: 30, name: "الجزء 30", range: "النبأ (من الآية 1 إلى الناس (من الآية 6)",                               start: "سورة النبأ، الآية 1",     end: "سورة الناس، الآية 6" }
+    { number: 1,  name: "الجزء 1",  range: "الفاتحة (من الآية 1 إلى الآية 7) → البقرة (من الآية 1 إلى الآية 141)" },
+    { number: 2,  name: "الجزء 2",  range: "البقرة (من الآية 142 إلى الآية 252)" },
+    { number: 3,  name: "الجزء 3",  range: "البقرة (من الآية 253) → آل عمران (من الآية 92)" },
+    { number: 4,  name: "الجزء 4",  range: "آل عمران (من الآية 93) → النساء (من الآية 23)" },
+    { number: 5,  name: "الجزء 5",  range: "النساء (من الآية 24 إلى الآية 147)" },
+    { number: 6,  name: "الجزء 6",  range: "النساء (من الآية 148) → المائدة (من الآية 81)" },
+    { number: 7,  name: "الجزء 7",  range: "المائدة (من الآية 82) → الأنعام (من الآية 110)" },
+    { number: 8,  name: "الجزء 8",  range: "الأنعام (من الآية 111) → الأعراف (من الآية 87)" },
+    { number: 9,  name: "الجزء 9",  range: "الأعراف (من الآية 88) → الأنفال (من الآية 40)" },
+    { number: 10, name: "الجزء 10", range: "الأنفال (من الآية 41) → التوبة (من الآية 92)" },
+    { number: 11, name: "الجزء 11", range: "التوبة (من الآية 93) → هود (من الآية 5)" },
+    { number: 12, name: "الجزء 12", range: "هود (من الآية 6) → يوسف (من الآية 52)" },
+    { number: 13, name: "الجزء 13", range: "يوسف (من الآية 53) → إبراهيم (من الآية 52)" },
+    { number: 14, name: "الجزء 14", range: "الحجر (من الآية 1) → النحل (من الآية 128)" },
+    { number: 15, name: "الجزء 15", range: "الإسراء (من الآية 1) → الكهف (من الآية 74)" },
+    { number: 16, name: "الجزء 16", range: "الكهف (من الآية 75) → طه (من الآية 135)" },
+    { number: 17, name: "الجزء 17", range: "الأنبياء (من الآية 1) → الحج (من الآية 78)" },
+    { number: 18, name: "الجزء 18", range: "المؤمنون (من الآية 1) → الفرقان (من الآية 20)" },
+    { number: 19, name: "الجزء 19", range: "الفرقان (من الآية 21) → النمل (من الآية 55)" },
+    { number: 20, name: "الجزء 20", range: "النمل (من الآية 56) → العنكبوت (من الآية 45)" },
+    { number: 21, name: "الجزء 21", range: "العنكبوت (من الآية 46) → الأحزاب (من الآية 30)" },
+    { number: 22, name: "الجزء 22", range: "الأحزاب (من الآية 31) → يس (من الآية 27)" },
+    { number: 23, name: "الجزء 23", range: "يس (من الآية 28) → الزمر (من الآية 31)" },
+    { number: 24, name: "الجزء 24", range: "الزمر (من الآية 32) → فصلت (من الآية 46)" },
+    { number: 25, name: "الجزء 25", range: "فصلت (من الآية 47) → الجاثية (من الآية 37)" },
+    { number: 26, name: "الجزء 26", range: "الأحقاف (من الآية 1) → الذاريات (من الآية 30)" },
+    { number: 27, name: "الجزء 27", range: "الذاريات (من الآية 31) → الحديد (من الآية 29)" },
+    { number: 28, name: "الجزء 28", range: "المجادلة (من الآية 1) → التحريم (من الآية 12)" },
+    { number: 29, name: "الجزء 29", range: "الملك (من الآية 1) → المرسلات (من الآية 50)" },
+    { number: 30, name: "الجزء 30", range: "النبأ (من الآية 1) → الناس (من الآية 6)" }
   ];
 
   // ============================================
-  // INTRO OVERLAY
+  // INTRO OVERLAY — FIXED
   // ============================================
   const introOverlay = document.querySelector('.intro-overlay');
   const introButton  = document.querySelector('.intro-button');
 
   if (introButton) {
     introButton.addEventListener('click', function() {
-      introOverlay.classList.add('fade-out');
-      setTimeout(() => {
-        introOverlay.style.display = 'none';
-      }, 1000);
+      // FIXED: use inline styles directly — not CSS class
+      // CSS class .fade-out may fail if stylesheet loads slowly
+      introOverlay.style.transition    = 'opacity 1s ease, transform 1s ease';
+      introOverlay.style.opacity       = '0';
+      introOverlay.style.transform     = 'scale(1.05)';
+      introOverlay.style.pointerEvents = 'none';
+      setTimeout(() => { introOverlay.style.display = 'none'; }, 1000);
     });
   }
 
   // ============================================
-  // SMOOTH SCROLL NAVIGATION
+  // SMOOTH SCROLL
   // ============================================
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  navLinks.forEach(link => {
+  document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      const targetId      = this.getAttribute('href').substring(1);
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      const target = document.getElementById(this.getAttribute('href').substring(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
   // ============================================
   // FADE-IN ON SCROLL
   // ============================================
-  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-
   const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -104,118 +95,178 @@ document.addEventListener('DOMContentLoaded', function() {
         if (entry.target.id === 'dua') animateDuaCards();
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  document.querySelectorAll('section').forEach(section => observer.observe(section));
+  document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-  // ============================================
-  // DUA CARDS ANIMATION
-  // ============================================
   function animateDuaCards() {
-    const cards = document.querySelectorAll('.dua-card');
-    cards.forEach((card, index) => {
-      setTimeout(() => card.classList.add('animate-in'), index * 200);
+    document.querySelectorAll('.dua-card').forEach((card, i) => {
+      setTimeout(() => card.classList.add('animate-in'), i * 200);
     });
   }
 
   // ============================================
   // QURAN JUZ SYSTEM — FIREBASE REALTIME SYNC
-  // Each Juz can be claimed by ONE person
-  // Others can still pick remaining Juz freely
   // ============================================
   const quranGrid    = document.querySelector('.quran-grid');
   const notification = document.getElementById('notification');
 
-  // myClaimedJuz = the juz number THIS browser user already claimed (stored locally)
   let myClaimedJuz = parseInt(localStorage.getItem('myClaimedJuz')) || null;
+  let myUserName   = localStorage.getItem('myUserName') || null;
+  let takenJuz     = {};
 
-  // takenJuz = object of all claimed Juz from Firebase e.g. { "3": true, "7": true }
-  let takenJuz = {};
-
-  // Generate all 30 juz buttons
   juzData.forEach(juz => {
-    const button = document.createElement('button');
-    button.className   = 'juz-button';
-    button.dataset.juz = juz.number;
-    button.innerHTML   = `
+    const btn = document.createElement('button');
+    btn.className   = 'juz-button';
+    btn.dataset.juz = juz.number;
+    btn.innerHTML   = `
       <div style="font-size:1.5rem;font-weight:bold;margin-bottom:0.5rem;">${juz.name}</div>
       <div style="font-size:1rem;line-height:1.6;opacity:0.9;">${juz.range}</div>
     `;
-    quranGrid.appendChild(button);
+    quranGrid.appendChild(btn);
   });
 
-  // Click handler — each user can only claim ONE juz
   document.querySelectorAll('.juz-button').forEach(button => {
     button.addEventListener('click', function() {
       const juzNumber = parseInt(this.dataset.juz);
-
-      // User already claimed a juz
-      if (myClaimedJuz) {
-        if (myClaimedJuz === juzNumber) {
-          showNotification('لقد اخترت هذا الجزء بالفعل 🤍');
-        } else {
-          showNotification('لقد اخترت جزءاً من قبل، لا يمكنك تغييره 🕌');
-        }
-        return;
-      }
-
-      // This juz is already taken by someone else
-      if (takenJuz[juzNumber]) {
-        showNotification('هذا الجزء محجوز من شخص آخر 🕌');
-        return;
-      }
-
-      // ✅ Claim this juz in Firebase
-      const juzRef = ref(db, 'takenJuz/' + juzNumber);
-      set(juzRef, true).then(() => {
-        myClaimedJuz = juzNumber;
-        localStorage.setItem('myClaimedJuz', juzNumber);
-        showNotification('تقبل الله منك 🤍');
-      });
+      if (myClaimedJuz === juzNumber) { openCancelModal(juzNumber); return; }
+      if (myClaimedJuz) { showNotification('لقد اخترت جزءاً من قبل، لا يمكنك تغييره 🕌'); return; }
+      if (takenJuz[juzNumber]) { showNotification('هذا الجزء محجوز من شخص آخر 🕌'); return; }
+      openNameModal(juzNumber);
     });
   });
 
   // ============================================
-  // 🔴 REAL-TIME LISTENER — watches ALL juz
-  // Updates every user's screen instantly
+  // NAME MODAL
   // ============================================
-  const allJuzRef = ref(db, 'takenJuz');
+  function openNameModal(juzNumber) {
+    const modal      = document.getElementById('nameModal');
+    const nameInput  = document.getElementById('userNameInput');
+    const confirmBtn = document.getElementById('nameConfirmBtn');
+    const juz        = juzData.find(j => j.number === juzNumber);
 
-  onValue(allJuzRef, (snapshot) => {
+    document.getElementById('nameModalJuzTitle').textContent = juz.name;
+    nameInput.value = myUserName || '';
+    nameInput.style.borderColor = '';
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('show'), 10);
+    nameInput.focus();
+
+    const newBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newBtn, confirmBtn);
+
+    newBtn.addEventListener('click', function() {
+      const name = nameInput.value.trim();
+      if (!name) {
+        nameInput.style.borderColor = '#e74c3c';
+        nameInput.placeholder = 'يرجى إدخال اسمك أولاً...';
+        return;
+      }
+      myUserName = name;
+      localStorage.setItem('myUserName', name);
+      closeModal('nameModal');
+      claimJuz(juzNumber, name);
+    });
+
+    nameInput.onkeypress = (e) => { if (e.key === 'Enter') newBtn.click(); };
+  }
+
+  // ============================================
+  // CANCEL MODAL
+  // ============================================
+  function openCancelModal(juzNumber) {
+    const modal      = document.getElementById('cancelModal');
+    const confirmBtn = document.getElementById('confirmCancelBtn');
+    const juz        = juzData.find(j => j.number === juzNumber);
+
+    document.getElementById('cancelModalJuzTitle').textContent = juz.name;
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('show'), 10);
+
+    const newBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newBtn, confirmBtn);
+    newBtn.addEventListener('click', function() {
+      releaseJuz(juzNumber);
+      closeModal('cancelModal');
+    });
+  }
+
+  function closeModal(id) {
+    const modal = document.getElementById(id);
+    modal.classList.remove('show');
+    setTimeout(() => { modal.style.display = 'none'; }, 400);
+  }
+
+  document.getElementById('nameModalClose')  ?.addEventListener('click', () => closeModal('nameModal'));
+  document.getElementById('cancelModalClose')?.addEventListener('click', () => closeModal('cancelModal'));
+  document.getElementById('keepJuzBtn')      ?.addEventListener('click', () => closeModal('cancelModal'));
+
+  ['nameModal','cancelModal'].forEach(id => {
+    document.getElementById(id)?.addEventListener('click', function(e) {
+      if (e.target === this) closeModal(id);
+    });
+  });
+
+  // ============================================
+  // CLAIM / RELEASE JUZ
+  // ============================================
+  function claimJuz(juzNumber, userName) {
+    set(ref(db, 'takenJuz/' + juzNumber), { taken: true, name: userName, time: Date.now() })
+      .then(() => {
+        myClaimedJuz = juzNumber;
+        localStorage.setItem('myClaimedJuz', juzNumber);
+        showNotification('تقبل الله منك 🤍');
+      })
+      .catch(() => showNotification('حدث خطأ، حاول مرة أخرى'));
+  }
+
+  function releaseJuz(juzNumber) {
+    remove(ref(db, 'takenJuz/' + juzNumber))
+      .then(() => {
+        myClaimedJuz = null;
+        localStorage.removeItem('myClaimedJuz');
+        showNotification('تم إلغاء الحجز 🔓');
+      })
+      .catch(() => showNotification('حدث خطأ، حاول مرة أخرى'));
+  }
+
+  // ============================================
+  // REAL-TIME LISTENER
+  // ============================================
+  onValue(ref(db, 'takenJuz'), (snapshot) => {
     takenJuz = snapshot.val() || {};
+    updateJuzCounter();
 
-    // Re-render all buttons based on current state
     document.querySelectorAll('.juz-button').forEach(btn => {
-      const n   = parseInt(btn.dataset.juz);
-      const juz = juzData.find(j => j.number === n);
+      const n    = parseInt(btn.dataset.juz);
+      const juz  = juzData.find(j => j.number === n);
+      const info = takenJuz[n];
 
       if (myClaimedJuz === n) {
-        // 🟢 THIS user's selected juz — green
         btn.classList.add('selected');
         btn.classList.remove('taken');
-        btn.disabled      = true;
+        btn.disabled = false;
         btn.style.opacity = '1';
         btn.innerHTML = `
           <div style="font-size:1.5rem;font-weight:bold;margin-bottom:0.5rem;">${juz.name}</div>
           <div style="font-size:1rem;line-height:1.6;opacity:0.9;">${juz.range}</div>
-          <div style="position:absolute;top:10px;left:10px;background:#4CAF50;color:white;padding:0.4rem 0.8rem;border-radius:15px;font-size:0.8rem;font-weight:bold;">جزؤك ✓</div>
+          <div style="position:absolute;top:10px;left:10px;background:#4CAF50;color:white;padding:0.4rem 0.8rem;border-radius:15px;font-size:0.8rem;font-weight:bold;">جزؤك ✓ — ${myUserName || ''}</div>
+          <div style="position:absolute;bottom:8px;right:50%;transform:translateX(50%);font-size:0.75rem;color:rgba(76,175,80,0.7);white-space:nowrap;">انقر للإلغاء</div>
         `;
-      } else if (takenJuz[n]) {
-        // 🔴 Taken by someone else — dimmed and locked
+      } else if (info) {
         btn.classList.remove('selected');
         btn.classList.add('taken');
-        btn.disabled      = true;
+        btn.disabled = true;
         btn.style.opacity = '0.4';
+        const takerName = (typeof info === 'object' && info.name) ? info.name : 'محجوز';
         btn.innerHTML = `
           <div style="font-size:1.5rem;font-weight:bold;margin-bottom:0.5rem;">${juz.name}</div>
           <div style="font-size:1rem;line-height:1.6;">${juz.range}</div>
-          <div style="position:absolute;top:10px;left:10px;background:#e74c3c;color:white;padding:0.4rem 0.8rem;border-radius:15px;font-size:0.8rem;font-weight:bold;">محجوز 🔒</div>
+          <div style="position:absolute;top:10px;left:10px;background:#e74c3c;color:white;padding:0.4rem 0.8rem;border-radius:15px;font-size:0.8rem;font-weight:bold;">🔒 ${takerName}</div>
         `;
       } else {
-        // ⚪ Available — show normally
-        btn.classList.remove('selected', 'taken');
+        btn.classList.remove('selected','taken');
         btn.style.opacity = '1';
-        // Disable only if THIS user already claimed something
         btn.disabled = !!myClaimedJuz;
         btn.innerHTML = `
           <div style="font-size:1.5rem;font-weight:bold;margin-bottom:0.5rem;">${juz.name}</div>
@@ -225,15 +276,46 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // ============================================
+  // JUZ COUNTER
+  // ============================================
+  function updateJuzCounter() {
+    const counter = document.getElementById('juzCounter');
+    const fill    = document.getElementById('juzProgressFill');
+    if (!counter || !fill) return;
+    const taken = Object.keys(takenJuz).length;
+    const pct   = Math.round((taken / 30) * 100);
+    counter.textContent = `${taken} / 30 جزء محجوز — ${pct}%`;
+    fill.style.width    = pct + '%';
+  }
+
   function showNotification(message) {
     const notifText = notification.querySelector('.notification-text');
-    if (notifText && message) notifText.textContent = message;
+    if (notifText) notifText.innerHTML = `<i class="fas fa-heart"></i> ${message}`;
     notification.classList.add('show');
     setTimeout(() => notification.classList.remove('show'), 2500);
   }
 
   // ============================================
-  // TASBIH COUNTER — kept in localStorage
+  // SHARE BUTTONS
+  // ============================================
+  document.getElementById('whatsappBtn')?.addEventListener('click', function() {
+    const url  = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent('شاركنا في ختمة القرآن الكريم — صدقة جارية 🤍\n');
+    window.open(`https://wa.me/?text=${text}${url}`, '_blank');
+  });
+
+  document.getElementById('shareBtn')?.addEventListener('click', function() {
+    if (navigator.share) {
+      navigator.share({ title: 'صدقة جارية', url: window.location.href });
+    } else {
+      navigator.clipboard.writeText(window.location.href)
+        .then(() => showNotification('تم نسخ الرابط 🔗'));
+    }
+  });
+
+  // ============================================
+  // TASBIH COUNTER
   // ============================================
   const tasbihDisplay = document.querySelector('.tasbih-display');
   const tasbihButton  = document.querySelector('.tasbih-button');
@@ -251,6 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
     playClickSound();
     this.style.transform = 'scale(0.95)';
     setTimeout(() => { this.style.transform = ''; }, 100);
+    if (tasbihCount % 100 === 0) showNotification(`🌟 أتممت ${tasbihCount} تسبيحة`);
   });
 
   resetButton.addEventListener('click', function() {
@@ -261,9 +344,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function updateTasbihDisplay() {
     tasbihDisplay.textContent = tasbihCount;
-    const percentage = (tasbihCount / maxCount) * 100;
+    const percentage = (tasbihCount % maxCount) / maxCount * 100;
     progressFill.style.width = percentage + '%';
-    if (tasbihCount >= maxCount) {
+    if (tasbihCount > 0 && tasbihCount % maxCount === 0) {
       progressFill.style.background = 'linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%)';
       tasbihDisplay.style.color     = '#4CAF50';
     } else {
@@ -273,21 +356,23 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function playClickSound() {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator   = audioContext.createOscillator();
-    const gainNode     = audioContext.createGain();
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-    oscillator.type = 'sine';
-    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.1);
+    try {
+      const ctx  = new (window.AudioContext || window.webkitAudioContext)();
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.setValueAtTime(800, ctx.currentTime);
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.1);
+    } catch(e) {}
   }
 
   // ============================================
-  // WEEKLY COUNTDOWN TIMER
+  // WEEKLY COUNTDOWN — FIXED: persists on refresh
   // ============================================
   const dayDisplay        = document.querySelector('.days');
   const hourDisplay       = document.querySelector('.hours');
@@ -296,29 +381,35 @@ document.addEventListener('DOMContentLoaded', function() {
   const completionMessage = document.querySelector('.completion-message');
   const countdownDisplay  = document.querySelector('.countdown-display');
 
-  const targetDate = new Date();
-  targetDate.setDate(targetDate.getDate() + 7);
-  targetDate.setHours(0, 0, 0, 0);
+  let targetDate;
+  const stored = localStorage.getItem('weeklyCountdownTarget');
+
+  if (stored) {
+    targetDate = new Date(parseInt(stored));
+    if (targetDate <= new Date()) {
+      targetDate = new Date();
+      targetDate.setDate(targetDate.getDate() + 7);
+      targetDate.setHours(0, 0, 0, 0);
+      localStorage.setItem('weeklyCountdownTarget', targetDate.getTime());
+    }
+  } else {
+    targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 7);
+    targetDate.setHours(0, 0, 0, 0);
+    localStorage.setItem('weeklyCountdownTarget', targetDate.getTime());
+  }
 
   function updateCountdown() {
-    const now        = new Date();
-    const difference = targetDate - now;
-
-    if (difference <= 0) {
+    const diff = targetDate - new Date();
+    if (diff <= 0) {
       countdownDisplay.style.display  = 'none';
       completionMessage.style.display = 'block';
       return;
     }
-
-    const days    = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours   = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-    dayDisplay.textContent    = days;
-    hourDisplay.textContent   = hours.toString().padStart(2, '0');
-    minuteDisplay.textContent = minutes.toString().padStart(2, '0');
-    secondDisplay.textContent = seconds.toString().padStart(2, '0');
+    dayDisplay.textContent    = Math.floor(diff / 86400000);
+    hourDisplay.textContent   = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+    minuteDisplay.textContent = String(Math.floor((diff % 3600000)  / 60000)).padStart(2,'0');
+    secondDisplay.textContent = String(Math.floor((diff % 60000)    / 1000)).padStart(2,'0');
   }
 
   updateCountdown();
@@ -328,24 +419,24 @@ document.addEventListener('DOMContentLoaded', function() {
   // PARALLAX STARS
   // ============================================
   const starsContainer = document.querySelector('.stars-container');
-  const numStars       = 100;
-
-  for (let i = 0; i < numStars; i++) {
+  for (let i = 0; i < 100; i++) {
     const star = document.createElement('div');
-    star.className              = 'star';
-    star.style.width            = Math.random() * 3 + 'px';
-    star.style.height           = star.style.width;
-    star.style.left             = Math.random() * 100 + '%';
-    star.style.top              = Math.random() * 100 + '%';
-    star.style.animationDelay   = Math.random() * 3 + 's';
-    star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    star.className = 'star';
+    star.style.cssText = `
+      width:${Math.random()*3}px;
+      height:${Math.random()*3}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-delay:${Math.random()*3}s;
+      animation-duration:${Math.random()*3+2}s;
+    `;
     starsContainer.appendChild(star);
   }
 
   document.addEventListener('mousemove', function(e) {
     const x = e.clientX / window.innerWidth;
     const y = e.clientY / window.innerHeight;
-    starsContainer.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+    starsContainer.style.transform = `translate(${x*10}px, ${y*10}px)`;
   });
 
   // ============================================
@@ -356,35 +447,33 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('mousemove', function(e) {
     cursorHalo.style.left = (e.clientX - 20) + 'px';
     cursorHalo.style.top  = (e.clientY - 20) + 'px';
-
-    let nearInteractive = false;
-    document.querySelectorAll('button, .nav-link, .dua-card').forEach(element => {
-      const rect     = element.getBoundingClientRect();
-      const distance = Math.sqrt(
-        Math.pow(e.clientX - (rect.left + rect.width  / 2), 2) +
-        Math.pow(e.clientY - (rect.top  + rect.height / 2), 2)
+    let near = false;
+    document.querySelectorAll('button, .nav-link, .dua-card').forEach(el => {
+      const r = el.getBoundingClientRect();
+      const d = Math.sqrt(
+        Math.pow(e.clientX - (r.left + r.width  / 2), 2) +
+        Math.pow(e.clientY - (r.top  + r.height / 2), 2)
       );
-      if (distance < 100) {
-        nearInteractive            = true;
+      if (d < 100) {
+        near = true;
         cursorHalo.style.transform = 'scale(1.5)';
         cursorHalo.style.opacity   = '1';
       }
     });
-
-    if (!nearInteractive) {
+    if (!near) {
       cursorHalo.style.transform = 'scale(1)';
       cursorHalo.style.opacity   = '0.7';
     }
   });
 
   // ============================================
-  // FEEDBACK SECTION
+  // FEEDBACK — single listener
   // ============================================
   const starBtns       = document.querySelectorAll('.star-btn');
   const ratingText     = document.getElementById('ratingText');
   const feedbackSubmit = document.getElementById('feedbackSubmit');
   const feedbackThanks = document.getElementById('feedbackThanks');
-  const ratingLabels = ['', 'ممتاز 🌟', 'جيد جداً', 'جيد', 'مقبول', 'ضعيف'];
+  const ratingLabels   = ['', 'ممتاز 🌟', 'جيد جداً', 'جيد', 'مقبول', 'ضعيف'];
   let selectedRating   = 0;
 
   starBtns.forEach(star => {
@@ -394,13 +483,11 @@ document.addEventListener('DOMContentLoaded', function() {
       ratingText.textContent = ratingLabels[val];
       ratingText.classList.add('active');
     });
-
     star.addEventListener('mouseleave', function() {
       starBtns.forEach(s => s.classList.remove('hovered'));
       ratingText.textContent = selectedRating ? ratingLabels[selectedRating] : 'اختر تقييمك';
       if (!selectedRating) ratingText.classList.remove('active');
     });
-
     star.addEventListener('click', function() {
       selectedRating = parseInt(this.dataset.value);
       starBtns.forEach(s => s.classList.toggle('selected', parseInt(s.dataset.value) >= selectedRating));
@@ -410,61 +497,74 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   if (feedbackSubmit) {
-    feedbackSubmit.addEventListener('click', function() {
-      if (!selectedRating) {
-        ratingText.textContent = 'يرجى اختيار تقييم أولاً ⭐';
-        ratingText.classList.add('active');
-        return;
-      }
-      feedbackSubmit.style.display = 'none';
-      feedbackThanks.style.display = 'block';
-    });
-  }if (feedbackSubmit) {
     feedbackSubmit.addEventListener('click', async function() {
       if (!selectedRating) {
         ratingText.textContent = 'يرجى اختيار تقييم أولاً ⭐';
         ratingText.classList.add('active');
         return;
       }
-
-      // 👇 Your Google Apps Script URL
       const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwHfphB7fh1U9anvF9Y50GcZBXSwsHVs2b2BASvGj8O0Ae47GdS-W2HcaVZQyx694WaAw/exec';
-
       const data = {
         rating:    selectedRating,
         feedback1: document.getElementById('feedback1').value || '—',
         feedback2: document.getElementById('feedback2').value || '—',
         feedback3: document.getElementById('feedback3').value || '—'
       };
-
       try {
         feedbackSubmit.textContent = '...جاري الإرسال';
         feedbackSubmit.disabled    = true;
-
-        await fetch(SHEET_URL, {
-          method: 'POST',
-          mode:   'no-cors',
-          body:   JSON.stringify(data)
-        });
-
+        await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
         feedbackSubmit.style.display = 'none';
         feedbackThanks.style.display = 'block';
-
       } catch (error) {
         feedbackSubmit.textContent = 'حدث خطأ، حاول مرة أخرى';
         feedbackSubmit.disabled    = false;
       }
     });
   }
-https://script.google.com/macros/s/AKfycb.../exec
 
   // ============================================
-  // PREVENT WHITE FLASH ON LOAD
+  // HAMBURGER MENU
   // ============================================
-  document.body.style.opacity    = '0';
-  document.body.style.transition = 'opacity 0.5s ease';
-  setTimeout(() => { document.body.style.opacity = '1'; }, 100);
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const navMenu      = document.getElementById('navMenu');
 
+  const navOverlay = document.createElement('div');
+  navOverlay.className = 'nav-overlay';
+  document.body.appendChild(navOverlay);
+
+  function openMenu() {
+    hamburgerBtn.classList.add('open');
+    navMenu.classList.add('open');
+    navOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    hamburgerBtn.classList.remove('open');
+    navMenu.classList.remove('open');
+    navOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburgerBtn?.addEventListener('click', function() {
+    navMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  navOverlay.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // ============================================
+  // FIXED: removed body opacity=0 that was hiding page
+  // Page is always fully visible now
+  // ============================================
   console.log('🌟 Sadaqah Jariyah Website Loaded - Firebase Connected');
   console.log('🤲 In memory of your beloved father and brother');
 
