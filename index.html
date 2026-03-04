@@ -17,7 +17,7 @@
   <div class="stars-container"></div>
   <div class="cursor-halo"></div>
 
-  <!-- INTRO OVERLAY -->
+  <!-- ============ INTRO OVERLAY ============ -->
   <div class="intro-overlay">
     <div class="intro-brand">
       <div class="intro-brand-arabic">أجر</div>
@@ -30,18 +30,26 @@
     <button class="intro-button">ابدأ</button>
   </div>
 
-  <!-- NAVIGATION -->
+  <!-- ============ NAVIGATION ============ -->
   <nav id="mainNav">
+
+    <!-- LOGO — text only -->
     <div class="nav-logo">
-      <span class="nav-logo-arabic">أجر</span>
-      <span class="nav-logo-sep">|</span>
-      <span class="nav-logo-latin">Adjer</span>
+      <div class="nav-logo-text">
+        <span class="nav-logo-arabic">أجر</span>
+        <span class="nav-logo-sep">|</span>
+        <span class="nav-logo-latin">Adjer</span>
+      </div>
     </div>
+
+    <!-- HAMBURGER (mobile only) -->
     <button class="hamburger" id="hamburgerBtn" aria-label="القائمة">
       <span class="ham-line"></span>
       <span class="ham-line"></span>
       <span class="ham-line"></span>
     </button>
+
+    <!-- NAV LINKS -->
     <ul class="nav-menu" id="navMenu">
       <li><a href="#quran"     class="nav-link"><i class="fas fa-book-quran"></i> القرآن</a></li>
       <li><a href="#countdown" class="nav-link"><i class="fas fa-clock"></i> ختمة الأسبوع</a></li>
@@ -57,7 +65,7 @@
     <section id="quran">
       <h2 class="section-title"><i class="fas fa-book-open"></i> أجزاء القرآن الكريم</h2>
       <div class="juz-counter-box">
-        <div id="juzCounter" class="juz-counter-text">0 / 30 جزء محجوز — 0%</div>
+        <div id="juzCounter" class="juz-counter-text">0 / 30 جزء تم اختياره — 0%</div>
         <div class="juz-progress-bar">
           <div id="juzProgressFill" class="juz-progress-fill"></div>
         </div>
@@ -165,7 +173,10 @@
   </main>
 
   <footer>
-    <div class="footer-brand">أجر <span>Adjer</span></div>
+    <div class="footer-brand">
+      <span class="footer-brand-ar">أجر</span>
+      <span class="footer-brand-en">Adjer</span>
+    </div>
     <div class="footer-text">اللهم اجعل هذا العمل صدقة جارية ونوراً لهما</div>
   </footer>
 
@@ -175,12 +186,12 @@
       <button class="sadaqah-modal-close" id="confirmModalClose">&times;</button>
       <div class="sadaqah-modal-icon">📖</div>
       <h3 class="sadaqah-modal-title" id="confirmModalTitle"></h3>
-      <p class="sadaqah-modal-desc">هل تؤكد اختيارك لهذا الجزء؟</p>
+      <p class="sadaqah-modal-desc">هل تؤكد اختيار هذا الجزء؟</p>
       <button class="sadaqah-modal-confirm-btn" id="confirmYesBtn">
-        <i class="fas fa-check"></i> نعم، أؤكد الاختيار
+        <i class="fas fa-check"></i> نعم
       </button>
       <button class="sadaqah-modal-keep-btn" id="confirmNoBtn">
-        <i class="fas fa-times"></i> لا، إلغاء
+        <i class="fas fa-times"></i> لا
       </button>
     </div>
   </div>
@@ -191,12 +202,12 @@
       <button class="sadaqah-modal-close" id="cancelModalClose">&times;</button>
       <div class="sadaqah-modal-icon">🔓</div>
       <h3 class="sadaqah-modal-title" id="cancelModalJuzTitle"></h3>
-      <p class="sadaqah-modal-desc">هل تريد إلغاء حجز هذا الجزء؟</p>
+      <p class="sadaqah-modal-desc">هل تريد إلغاء اختيارك لهذا الجزء؟</p>
       <button class="sadaqah-modal-confirm-btn sadaqah-modal-danger" id="confirmCancelBtn">
-        <i class="fas fa-times"></i> نعم، إلغاء الحجز
+        <i class="fas fa-times"></i> نعم، إلغاء
       </button>
       <button class="sadaqah-modal-keep-btn" id="keepJuzBtn">
-        <i class="fas fa-heart"></i> لا، أحتفظ به
+        <i class="fas fa-heart"></i> لا، أبقيه
       </button>
     </div>
   </div>
