@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>أجر | Adjer — صدقة جارية في ذكرى أبي وأخي</title>
   <meta name="description" content="مشروع صدقة جارية لقراءة القرآن والأذكار في ذكرى أبي وأخي">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
@@ -32,8 +31,6 @@
 
   <!-- ============ NAVIGATION ============ -->
   <nav id="mainNav">
-
-    <!-- LOGO — text only -->
     <div class="nav-logo">
       <div class="nav-logo-text">
         <span class="nav-logo-arabic">أجر</span>
@@ -41,15 +38,11 @@
         <span class="nav-logo-latin">Adjer</span>
       </div>
     </div>
-
-    <!-- HAMBURGER (mobile only) -->
     <button class="hamburger" id="hamburgerBtn" aria-label="القائمة">
       <span class="ham-line"></span>
       <span class="ham-line"></span>
       <span class="ham-line"></span>
     </button>
-
-    <!-- NAV LINKS -->
     <ul class="nav-menu" id="navMenu">
       <li><a href="#quran"     class="nav-link"><i class="fas fa-book-quran"></i> القرآن</a></li>
       <li><a href="#countdown" class="nav-link"><i class="fas fa-clock"></i> ختمة الأسبوع</a></li>
@@ -87,22 +80,10 @@
       <div class="countdown-container">
         <p class="countdown-label">الوقت المتبقي لإتمام الختمة</p>
         <div class="countdown-display">
-          <div class="time-unit">
-            <div class="time-value days">0</div>
-            <div class="time-label">أيام</div>
-          </div>
-          <div class="time-unit">
-            <div class="time-value hours">00</div>
-            <div class="time-label">ساعات</div>
-          </div>
-          <div class="time-unit">
-            <div class="time-value minutes">00</div>
-            <div class="time-label">دقائق</div>
-          </div>
-          <div class="time-unit">
-            <div class="time-value seconds">00</div>
-            <div class="time-label">ثواني</div>
-          </div>
+          <div class="time-unit"><div class="time-value days">0</div><div class="time-label">أيام</div></div>
+          <div class="time-unit"><div class="time-value hours">00</div><div class="time-label">ساعات</div></div>
+          <div class="time-unit"><div class="time-value minutes">00</div><div class="time-label">دقائق</div></div>
+          <div class="time-unit"><div class="time-value seconds">00</div><div class="time-label">ثواني</div></div>
         </div>
         <div class="completion-message">اللهم تقبل ختمتنا 🤍</div>
       </div>
@@ -172,16 +153,25 @@
 
   </main>
 
+  <!-- FOOTER with visitor counter -->
   <footer>
     <div class="footer-brand">
       <span class="footer-brand-ar">أجر</span>
       <span class="footer-brand-en">Adjer</span>
     </div>
     <div class="footer-text">اللهم اجعل هذا العمل صدقة جارية ونوراً لهما</div>
+    <div class="visitor-counter" id="visitorCounter">
+      <i class="fas fa-users"></i>
+      <span id="visitorCount">...</span>
+      <span>زيارة</span>
+    </div>
   </footer>
 
-  <!-- MODAL: CONFIRM JUZ -->
-  <div class="sadaqah-modal-overlay" id="confirmModal" style="display:none;">
+  <!--
+    MODAL: CONFIRM JUZ
+    No inline style="display:none" — CSS controls visibility via opacity/pointer-events
+  -->
+  <div class="sadaqah-modal-overlay" id="confirmModal">
     <div class="sadaqah-modal-box">
       <button class="sadaqah-modal-close" id="confirmModalClose">&times;</button>
       <div class="sadaqah-modal-icon">📖</div>
@@ -196,18 +186,18 @@
     </div>
   </div>
 
-  <!-- MODAL: CANCEL JUZ -->
-  <div class="sadaqah-modal-overlay" id="cancelModal" style="display:none;">
+  <!-- MODAL: CANCEL / SWITCH JUZ -->
+  <div class="sadaqah-modal-overlay" id="cancelModal">
     <div class="sadaqah-modal-box">
       <button class="sadaqah-modal-close" id="cancelModalClose">&times;</button>
-      <div class="sadaqah-modal-icon">🔓</div>
+      <div class="sadaqah-modal-icon" id="cancelModalIcon">🔓</div>
       <h3 class="sadaqah-modal-title" id="cancelModalJuzTitle"></h3>
-      <p class="sadaqah-modal-desc">هل تريد إلغاء اختيارك لهذا الجزء؟</p>
+      <p class="sadaqah-modal-desc" id="cancelModalDesc">هل تريد إلغاء اختيارك لهذا الجزء؟</p>
       <button class="sadaqah-modal-confirm-btn sadaqah-modal-danger" id="confirmCancelBtn">
-        <i class="fas fa-times"></i> نعم، إلغاء
+        <i class="fas fa-check"></i> نعم
       </button>
       <button class="sadaqah-modal-keep-btn" id="keepJuzBtn">
-        <i class="fas fa-heart"></i> لا، أبقيه
+        <i class="fas fa-times"></i> لا
       </button>
     </div>
   </div>
