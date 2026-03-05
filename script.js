@@ -36,52 +36,50 @@ const db  = getDatabase(app);
 // JUZ DATA
 // ============================================
 const juzData = [
-  { number:  1, name: "الجزء 1",  range: "الفاتحة (1-7) \u2192 البقرة (1-141)" },
+  { number:  1, name: "الجزء 1",  range: "الفاتحة (1-7) → البقرة (1-141)" },
   { number:  2, name: "الجزء 2",  range: "البقرة (142-252)" },
-  { number:  3, name: "الجزء 3",  range: "البقرة (253) \u2192 آل عمران (92)" },
-  { number:  4, name: "الجزء 4",  range: "آل عمران (93) \u2192 النساء (23)" },
+  { number:  3, name: "الجزء 3",  range: "البقرة (253) → آل عمران (92)" },
+  { number:  4, name: "الجزء 4",  range: "آل عمران (93) → النساء (23)" },
   { number:  5, name: "الجزء 5",  range: "النساء (24-147)" },
-  { number:  6, name: "الجزء 6",  range: "النساء (148) \u2192 المائدة (81)" },
-  { number:  7, name: "الجزء 7",  range: "المائدة (82) \u2192 الأنعام (110)" },
-  { number:  8, name: "الجزء 8",  range: "الأنعام (111) \u2192 الأعراف (87)" },
-  { number:  9, name: "الجزء 9",  range: "الأعراف (88) \u2192 الأنفال (40)" },
-  { number: 10, name: "الجزء 10", range: "الأنفال (41) \u2192 التوبة (92)" },
-  { number: 11, name: "الجزء 11", range: "التوبة (93) \u2192 هود (5)" },
-  { number: 12, name: "الجزء 12", range: "هود (6) \u2192 يوسف (52)" },
-  { number: 13, name: "الجزء 13", range: "يوسف (53) \u2192 إبراهيم (52)" },
-  { number: 14, name: "الجزء 14", range: "الحجر (1) \u2192 النحل (128)" },
-  { number: 15, name: "الجزء 15", range: "الإسراء (1) \u2192 الكهف (74)" },
-  { number: 16, name: "الجزء 16", range: "الكهف (75) \u2192 طه (135)" },
-  { number: 17, name: "الجزء 17", range: "الأنبياء (1) \u2192 الحج (78)" },
-  { number: 18, name: "الجزء 18", range: "المؤمنون (1) \u2192 الفرقان (20)" },
-  { number: 19, name: "الجزء 19", range: "الفرقان (21) \u2192 النمل (55)" },
-  { number: 20, name: "الجزء 20", range: "النمل (56) \u2192 العنكبوت (45)" },
-  { number: 21, name: "الجزء 21", range: "العنكبوت (46) \u2192 الأحزاب (30)" },
-  { number: 22, name: "الجزء 22", range: "الأحزاب (31) \u2192 يس (27)" },
-  { number: 23, name: "الجزء 23", range: "يس (28) \u2192 الزمر (31)" },
-  { number: 24, name: "الجزء 24", range: "الزمر (32) \u2192 فصلت (46)" },
-  { number: 25, name: "الجزء 25", range: "فصلت (47) \u2192 الجاثية (37)" },
-  { number: 26, name: "الجزء 26", range: "الأحقاف (1) \u2192 الذاريات (30)" },
-  { number: 27, name: "الجزء 27", range: "الذاريات (31) \u2192 الحديد (29)" },
-  { number: 28, name: "الجزء 28", range: "المجادلة (1) \u2192 التحريم (12)" },
-  { number: 29, name: "الجزء 29", range: "الملك (1) \u2192 المرسلات (50)" },
-  { number: 30, name: "الجزء 30", range: "النبأ (1) \u2192 الناس (6)" }
+  { number:  6, name: "الجزء 6",  range: "النساء (148) → المائدة (81)" },
+  { number:  7, name: "الجزء 7",  range: "المائدة (82) → الأنعام (110)" },
+  { number:  8, name: "الجزء 8",  range: "الأنعام (111) → الأعراف (87)" },
+  { number:  9, name: "الجزء 9",  range: "الأعراف (88) → الأنفال (40)" },
+  { number: 10, name: "الجزء 10", range: "الأنفال (41) → التوبة (92)" },
+  { number: 11, name: "الجزء 11", range: "التوبة (93) → هود (5)" },
+  { number: 12, name: "الجزء 12", range: "هود (6) → يوسف (52)" },
+  { number: 13, name: "الجزء 13", range: "يوسف (53) → إبراهيم (52)" },
+  { number: 14, name: "الجزء 14", range: "الحجر (1) → النحل (128)" },
+  { number: 15, name: "الجزء 15", range: "الإسراء (1) → الكهف (74)" },
+  { number: 16, name: "الجزء 16", range: "الكهف (75) → طه (135)" },
+  { number: 17, name: "الجزء 17", range: "الأنبياء (1) → الحج (78)" },
+  { number: 18, name: "الجزء 18", range: "المؤمنون (1) → الفرقان (20)" },
+  { number: 19, name: "الجزء 19", range: "الفرقان (21) → النمل (55)" },
+  { number: 20, name: "الجزء 20", range: "النمل (56) → العنكبوت (45)" },
+  { number: 21, name: "الجزء 21", range: "العنكبوت (46) → الأحزاب (30)" },
+  { number: 22, name: "الجزء 22", range: "الأحزاب (31) → يس (27)" },
+  { number: 23, name: "الجزء 23", range: "يس (28) → الزمر (31)" },
+  { number: 24, name: "الجزء 24", range: "الزمر (32) → فصلت (46)" },
+  { number: 25, name: "الجزء 25", range: "فصلت (47) → الجاثية (37)" },
+  { number: 26, name: "الجزء 26", range: "الأحقاف (1) → الذاريات (30)" },
+  { number: 27, name: "الجزء 27", range: "الذاريات (31) → الحديد (29)" },
+  { number: 28, name: "الجزء 28", range: "المجادلة (1) → التحريم (12)" },
+  { number: 29, name: "الجزء 29", range: "الملك (1) → المرسلات (50)" },
+  { number: 30, name: "الجزء 30", range: "النبأ (1) → الناس (6)" }
 ];
 
 // ============================================
 // STATE — anonymous, no personal data stored
 // ============================================
 let myClaimedJuz = parseInt(localStorage.getItem('myClaimedJuz')) || null;
-let takenJuz     = {};  // { juzNumber: { count, time } }
+let takenJuz     = {};
 
 // ============================================
 // DOM READY
 // ============================================
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ─────────────────────────────────────────
   // INTRO
-  // ─────────────────────────────────────────
   const introOverlay = document.querySelector('.intro-overlay');
   const introButton  = document.querySelector('.intro-button');
   if (introButton) {
@@ -93,9 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ─────────────────────────────────────────
   // SMOOTH SCROLL
-  // ─────────────────────────────────────────
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', function (e) {
       e.preventDefault();
@@ -104,9 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ─────────────────────────────────────────
-  // SECTION FADE-IN (IntersectionObserver)
-  // ─────────────────────────────────────────
+  // SECTION FADE-IN
   const sectionObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -123,9 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
     );
   }
 
-  // ─────────────────────────────────────────
   // BUILD JUZ GRID
-  // ─────────────────────────────────────────
   const quranGrid = document.getElementById('quranGrid');
   juzData.forEach(juz => {
     const btn = document.createElement('button');
@@ -135,15 +127,20 @@ document.addEventListener('DOMContentLoaded', function () {
     quranGrid.appendChild(btn);
   });
 
-  // ─────────────────────────────────────────
-  // JUZ BUTTON HTML BUILDER
-  // Shows count + mine badge. No locking.
-  // ─────────────────────────────────────────
+  // Glow class based on reader count
+  function getGlowClass(count) {
+    if (count === 0) return 'juz-waiting';
+    if (count <= 2)  return 'juz-few';
+    if (count <= 5)  return 'juz-some';
+    return 'juz-many';
+  }
+
   function buildJuzHTML(juz, info, isMine) {
     const count = info ? (info.count || 0) : 0;
-    const countBadge = count > 0
-      ? `<span class="juz-count-badge">اختاره ${count} ${count === 1 ? 'شخص' : 'أشخاص'}</span>`
-      : `<span class="juz-count-badge"></span>`;
+    const badgeText = count === 0
+      ? '✨ في انتظار قارئ'
+      : `👥 ${count} ${count === 1 ? 'قارئ' : 'قرّاء'}`;
+    const countBadge = `<span class="juz-count-badge">${badgeText}</span>`;
 
     if (isMine) {
       return `
@@ -165,89 +162,51 @@ document.addEventListener('DOMContentLoaded', function () {
       ${countBadge}`;
   }
 
-  // ─────────────────────────────────────────
   // JUZ CLICK HANDLER
-  //
-  // Cases:
-  //   A. Click own juz         → open cancel/switch modal
-  //   B. Click different juz,
-  //      user has selection    → open confirm-switch modal
-  //   C. No selection yet      → open confirm modal
-  // ─────────────────────────────────────────
   document.querySelectorAll('.juz-button').forEach(btn => {
     btn.addEventListener('click', function () {
       const n = parseInt(this.dataset.juz);
-
       if (myClaimedJuz === n) {
-        // Case A: own juz — offer cancel
         openCancelModal(n, null);
       } else if (myClaimedJuz) {
-        // Case B: has selection — offer switch
         openSwitchModal(myClaimedJuz, n);
       } else {
-        // Case C: fresh selection
         openConfirmModal(n);
       }
     });
   });
 
-  // ─────────────────────────────────────────
   // MODAL SYSTEM
-  //
-  // CSS class used: .modal-visible  (opacity:1 + pointer-events:auto)
-  // Base state:                     (opacity:0 + pointer-events:none)
-  // This allows smooth fade in AND out via CSS transition.
-  // ─────────────────────────────────────────
   function openModal(id) {
     const m = document.getElementById(id);
-    // requestAnimationFrame ensures display is ready before transition fires
     requestAnimationFrame(() => m.classList.add('modal-visible'));
   }
-
   function closeModal(id) {
-    const m = document.getElementById(id);
-    m.classList.remove('modal-visible');
-    // No additional action needed — CSS handles opacity fade
-    // pointer-events:none prevents interaction while fading
+    document.getElementById(id).classList.remove('modal-visible');
   }
 
-  // CONFIRM: fresh selection (Case C)
   function openConfirmModal(juzNumber) {
     const juz = juzData.find(j => j.number === juzNumber);
     document.getElementById('confirmModalTitle').textContent = juz.name;
-
-    // Clone yes-btn to clear any previous listener
     const oldYes = document.getElementById('confirmYesBtn');
     const newYes = oldYes.cloneNode(true);
     oldYes.parentNode.replaceChild(newYes, oldYes);
-
-    newYes.addEventListener('click', () => {
-      closeModal('confirmModal');
-      claimJuz(juzNumber);
-    });
+    newYes.addEventListener('click', () => { closeModal('confirmModal'); claimJuz(juzNumber); });
     openModal('confirmModal');
   }
 
-  // CANCEL: user clicked own juz (Case A)
-  // switchTo = null means pure cancel
   function openCancelModal(juzNumber, switchTo) {
     const juz = juzData.find(j => j.number === juzNumber);
     document.getElementById('cancelModalJuzTitle').textContent = juz.name;
     document.getElementById('cancelModalDesc').textContent = 'هل تريد إلغاء اختيارك لهذا الجزء؟';
     document.getElementById('cancelModalIcon').textContent = '🔓';
-
     const oldBtn = document.getElementById('confirmCancelBtn');
     const newBtn = oldBtn.cloneNode(true);
     oldBtn.parentNode.replaceChild(newBtn, oldBtn);
-
-    newBtn.addEventListener('click', () => {
-      closeModal('cancelModal');
-      releaseJuz(juzNumber, null); // pure cancel, no switch
-    });
+    newBtn.addEventListener('click', () => { closeModal('cancelModal'); releaseJuz(juzNumber, null); });
     openModal('cancelModal');
   }
 
-  // SWITCH: user has selection and clicked a different juz (Case B)
   function openSwitchModal(oldJuz, newJuz) {
     const oldJuzData = juzData.find(j => j.number === oldJuz);
     const newJuzData = juzData.find(j => j.number === newJuz);
@@ -255,39 +214,29 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('cancelModalDesc').textContent =
       `هل تريد الانتقال من ${oldJuzData.name} إلى ${newJuzData.name}؟`;
     document.getElementById('cancelModalIcon').textContent = '🔄';
-
     const oldBtn = document.getElementById('confirmCancelBtn');
     const newBtn = oldBtn.cloneNode(true);
     oldBtn.parentNode.replaceChild(newBtn, oldBtn);
-
-    newBtn.addEventListener('click', () => {
-      closeModal('cancelModal');
-      switchJuz(oldJuz, newJuz); // atomic switch
-    });
+    newBtn.addEventListener('click', () => { closeModal('cancelModal'); switchJuz(oldJuz, newJuz); });
     openModal('cancelModal');
   }
 
-  // Wire close buttons
   document.getElementById('confirmModalClose')?.addEventListener('click', () => closeModal('confirmModal'));
   document.getElementById('confirmNoBtn')     ?.addEventListener('click', () => closeModal('confirmModal'));
   document.getElementById('cancelModalClose') ?.addEventListener('click', () => closeModal('cancelModal'));
   document.getElementById('keepJuzBtn')       ?.addEventListener('click', () => closeModal('cancelModal'));
 
-  // Backdrop click
   ['confirmModal', 'cancelModal'].forEach(id => {
     document.getElementById(id)?.addEventListener('click', function (e) {
       if (e.target === this) closeModal(id);
     });
   });
 
-  // Escape key
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') { closeModal('confirmModal'); closeModal('cancelModal'); }
   });
 
-  // ─────────────────────────────────────────
-  // CLAIM JUZ — Firebase atomic increment
-  // ─────────────────────────────────────────
+  // CLAIM JUZ
   function claimJuz(juzNumber) {
     const juzRef = ref(db, `takenJuz/${juzNumber}`);
     runTransaction(juzRef, current => ({
@@ -306,11 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(() => showNotification('حدث خطأ، حاول مرة أخرى'));
   }
 
-  // ─────────────────────────────────────────
-  // RELEASE JUZ — Firebase atomic decrement
-  // switchToJuz = number → claim after release (switch)
-  // switchToJuz = null   → pure cancel
-  // ─────────────────────────────────────────
+  // RELEASE JUZ
   function releaseJuz(juzNumber, switchToJuz) {
     const juzRef = ref(db, `takenJuz/${juzNumber}`);
     runTransaction(juzRef, current => {
@@ -322,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
       myClaimedJuz = null;
       localStorage.removeItem('myClaimedJuz');
       if (switchToJuz) {
-        claimJuz(switchToJuz); // chain: claim new juz after releasing old
+        claimJuz(switchToJuz);
       } else {
         showNotification('تم إلغاء الاختيار 🔓');
       }
@@ -330,18 +275,11 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(() => showNotification('حدث خطأ، حاول مرة أخرى'));
   }
 
-  // ─────────────────────────────────────────
-  // SWITCH JUZ — release old then claim new
-  // Sequential: ensures count integrity
-  // ─────────────────────────────────────────
   function switchJuz(oldJuz, newJuz) {
     releaseJuz(oldJuz, newJuz);
-    // claimJuz(newJuz) is called inside releaseJuz after successful release
   }
 
-  // ─────────────────────────────────────────
-  // REAL-TIME LISTENER — takenJuz
-  // ─────────────────────────────────────────
+  // REAL-TIME LISTENER
   onValue(ref(db, 'takenJuz'), snapshot => {
     takenJuz = snapshot.val() || {};
     updateJuzCounter();
@@ -350,22 +288,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function renderAllButtons() {
     document.querySelectorAll('.juz-button').forEach(btn => {
-      const n    = parseInt(btn.dataset.juz);
-      const juz  = juzData.find(j => j.number === n);
-      const info = takenJuz[n] || null;
-      const mine = myClaimedJuz === n;
+      const n     = parseInt(btn.dataset.juz);
+      const juz   = juzData.find(j => j.number === n);
+      const info  = takenJuz[n] || null;
+      const mine  = myClaimedJuz === n;
+      const count = info ? (info.count || 0) : 0;
 
       btn.classList.toggle('selected', mine);
       btn.style.opacity = '1';
-      // All buttons remain clickable — switching is now allowed
-      btn.disabled  = false;
+      btn.disabled = false;
+
+      btn.classList.remove('juz-waiting', 'juz-few', 'juz-some', 'juz-many');
+      if (!mine) btn.classList.add(getGlowClass(count));
+
       btn.innerHTML = buildJuzHTML(juz, info, mine);
     });
   }
 
-  // ─────────────────────────────────────────
   // JUZ PROGRESS COUNTER
-  // ─────────────────────────────────────────
   function updateJuzCounter() {
     const counter = document.getElementById('juzCounter');
     const fill    = document.getElementById('juzProgressFill');
@@ -376,9 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fill.style.width    = pct + '%';
   }
 
-  // ─────────────────────────────────────────
-  // NOTIFICATION (center pop)
-  // ─────────────────────────────────────────
+  // NOTIFICATION
   const notifEl = document.getElementById('notification');
   let notifTimer;
   function showNotification(msg) {
@@ -389,9 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
     notifTimer = setTimeout(() => notifEl.classList.remove('show'), 2800);
   }
 
-  // ─────────────────────────────────────────
   // SHARE BUTTONS
-  // ─────────────────────────────────────────
   document.getElementById('whatsappBtn')?.addEventListener('click', () => {
     const u = encodeURIComponent(window.location.href);
     const t = encodeURIComponent('شاركنا في ختمة القرآن — صدقة جارية 🤍\n');
@@ -406,9 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // ─────────────────────────────────────────
-  // TASBIH COUNTER (local)
-  // ─────────────────────────────────────────
+  // TASBIH COUNTER
   const tasbihDisplay = document.querySelector('.tasbih-display');
   const tasbihBtn     = document.querySelector('.tasbih-button');
   const resetBtn      = document.querySelector('.reset-button');
@@ -455,26 +389,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (_) {}
   }
 
-  // ─────────────────────────────────────────
-  // WEEKLY COUNTDOWN — Firebase Synced
-  //
-  // Firebase paths:
-  //   weeklyCountdown/startTime → epoch ms when week began
-  //   weeklyCountdown/resetting → boolean lock (race condition guard)
-  //
-  // Logic:
-  //   1. Read startTime from Firebase (never overwrite if exists)
-  //   2. If missing: write via transaction (only first user wins)
-  //   3. If expired: trigger performWeeklyReset()
-  //   4. Tick runs purely client-side (zero Firebase writes per second)
-  //   5. On expiry: lock → clear takenJuz → write new startTime → unlock
-  //
-  // Safe behaviors:
-  //   - No writes inside tick() loop (no infinite write issue)
-  //   - Lock transaction prevents multiple simultaneous resets
-  //   - Loser of lock race waits 3s then reads the new startTime
-  //   - Fallback to localStorage if Firebase unreachable
-  // ─────────────────────────────────────────
+  // WEEKLY COUNTDOWN
   const WEEK_MS  = 7 * 24 * 60 * 60 * 1000;
   const cdRef    = ref(db, 'weeklyCountdown/startTime');
   const lockRef  = ref(db, 'weeklyCountdown/resetting');
@@ -488,26 +403,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let cdInterval = null;
 
-  // Step 1: Read startTime
   get(cdRef).then(snap => {
     if (snap.exists()) {
       const startTime = snap.val();
       const target    = startTime + WEEK_MS;
       if (Date.now() >= target) {
-        performWeeklyReset(); // expired
+        performWeeklyReset();
       } else {
-        startCountdown(target); // still running
+        startCountdown(target);
       }
     } else {
-      // First ever load — race-safe write via transaction
       runTransaction(cdRef, current => {
-        if (current !== null) return undefined; // abort if someone beat us
+        if (current !== null) return undefined;
         return Date.now();
       }).then(result => {
         if (result.committed) {
           startCountdown(result.snapshot.val() + WEEK_MS);
         } else {
-          // Someone else wrote it — read their value
           get(cdRef).then(s => { if (s.exists()) startCountdown(s.val() + WEEK_MS); });
         }
       }).catch(fallbackCountdown);
@@ -523,12 +435,10 @@ document.addEventListener('DOMContentLoaded', function () {
     startCountdown(stored);
   }
 
-  // Step 2: Pure client-side tick — ZERO Firebase writes here
   function startCountdown(targetMs) {
     if (cdInterval) clearInterval(cdInterval);
     tick();
     cdInterval = setInterval(tick, 1000);
-
     function tick() {
       const diff = targetMs - Date.now();
       if (diff <= 0) {
@@ -536,7 +446,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cdInterval = null;
         dispEl.style.display = 'none';
         doneEl.style.display = 'block';
-        performWeeklyReset(); // single call, transaction-protected
+        performWeeklyReset();
         return;
       }
       dayEl.textContent  = Math.floor(diff / 86400000);
@@ -546,15 +456,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Step 3: Weekly reset — transaction lock prevents race conditions
   function performWeeklyReset() {
     runTransaction(lockRef, currentLock => {
-      if (currentLock === true) return undefined; // lock held → abort
-      return true; // acquire lock
+      if (currentLock === true) return undefined;
+      return true;
     }).then(result => {
-
       if (!result.committed) {
-        // Another user is resetting — wait then read new startTime
         setTimeout(() => {
           get(cdRef).then(snap => {
             if (snap.exists()) {
@@ -566,13 +473,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3500);
         return;
       }
-
-      // We hold the lock — perform the full reset
       const newStartTime = Date.now();
-
-      remove(ref(db, 'takenJuz'))           // clear all juz selections
-        .then(() => set(cdRef, newStartTime)) // write new week start
-        .then(() => set(lockRef, false))      // release lock
+      remove(ref(db, 'takenJuz'))
+        .then(() => set(cdRef, newStartTime))
+        .then(() => set(lockRef, false))
         .then(() => {
           myClaimedJuz = null;
           localStorage.removeItem('myClaimedJuz');
@@ -582,44 +486,28 @@ document.addEventListener('DOMContentLoaded', function () {
             startCountdown(newStartTime + WEEK_MS);
           }, 5000);
         })
-        .catch(() => set(lockRef, false)); // always release lock on failure
-
+        .catch(() => set(lockRef, false));
     }).catch(fallbackCountdown);
   }
 
-  // ─────────────────────────────────────────
   // VISITOR COUNTER
-  //
-  // Firebase path: visitors/total
-  // Uses sessionStorage to count once per browser session (not per refresh).
-  // runTransaction ensures atomic increment — no race conditions.
-  // Non-blocking: does not affect page load or any other feature.
-  // ─────────────────────────────────────────
   initVisitorCounter();
-
   function initVisitorCounter() {
     const visitorCountEl = document.getElementById('visitorCount');
     if (!visitorCountEl) return;
-
     const visitorsRef = ref(db, 'visitors/total');
-
-    // Live display: always show latest count
     onValue(visitorsRef, snap => {
       const total = snap.exists() ? snap.val() : 0;
       visitorCountEl.textContent = total.toLocaleString('ar-EG');
     });
-
-    // Increment only once per session (sessionStorage prevents double-count on refresh)
     if (!sessionStorage.getItem('adjer_visited')) {
       sessionStorage.setItem('adjer_visited', '1');
       runTransaction(visitorsRef, current => (current || 0) + 1)
-        .catch(() => {}); // silent fail — counter is non-critical
+        .catch(() => {});
     }
   }
 
-  // ─────────────────────────────────────────
   // STARS PARALLAX
-  // ─────────────────────────────────────────
   const starsEl = document.querySelector('.stars-container');
   for (let i = 0; i < 100; i++) {
     const s  = document.createElement('div');
@@ -635,9 +523,7 @@ document.addEventListener('DOMContentLoaded', function () {
     starsEl.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
   });
 
-  // ─────────────────────────────────────────
   // CURSOR HALO
-  // ─────────────────────────────────────────
   const halo = document.querySelector('.cursor-halo');
   document.addEventListener('mousemove', e => {
     halo.style.left = (e.clientX - 20) + 'px';
@@ -652,15 +538,10 @@ document.addEventListener('DOMContentLoaded', function () {
     halo.style.opacity   = near ? '1' : '0.7';
   });
 
-  // ─────────────────────────────────────────
   // HAMBURGER MENU
-  // z-index hierarchy: hamburger(1200) > panel(1100) > overlay(1050) > nav(1000)
-  // Background: #0a1820 solid — no backdrop-filter (was causing blur issue)
-  // ─────────────────────────────────────────
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const navMenu      = document.getElementById('navMenu');
-
-  const navOverlay = document.createElement('div');
+  const navOverlay   = document.createElement('div');
   navOverlay.className = 'nav-overlay';
   document.body.appendChild(navOverlay);
 
@@ -684,9 +565,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', closeMenu));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-  // ─────────────────────────────────────────
   // FEEDBACK
-  // ─────────────────────────────────────────
   const starBtns   = document.querySelectorAll('.star-btn');
   const ratingText = document.getElementById('ratingText');
   const fbSubmit   = document.getElementById('feedbackSubmit');
@@ -745,4 +624,3 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log('🤲 In memory of your beloved father and brother');
 
 }); // end DOMContentLoaded
-
